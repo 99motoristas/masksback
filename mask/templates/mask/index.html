@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Validador Máscara</title>
+  </head>
+  <body>
+    <div class="row mt-4">
+      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12 mx-auto">
+        <div class="card mx-auto text-center">
+          <div class="card-body">
+            <img src="https://imagens.canaltech.com.br/empresas/2902.400.jpg" style="width:50px" alt="">
+            <h1 class="mb-3 mt-3">Validador de Máscara </h1>
+            <div class="form-group">
+
+              <label class="sr-only" for="inlineFormInputGroup">CPF</label>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Digite o CPF</div>
+                </div>
+                <input type="text" class="form-control" id="inputdata" placeholder="14393029000">
+              </div>
+              <button type="button" onclick="validate()" class="btn btn-primary mb-2">Buscar</button>
+
+              <svg id="loading" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;background:#fff;display:none;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+              <circle cx="84" cy="50" r="2.29741" fill="#e15b64">
+                  <animate attributeName="r" repeatCount="indefinite" dur="0.7352941176470589s" calcMode="spline" keyTimes="0;1" values="10;0" keySplines="0 0.5 0.5 1" begin="0s"></animate>
+                  <animate attributeName="fill" repeatCount="indefinite" dur="2.9411764705882355s" calcMode="discrete" keyTimes="0;0.25;0.5;0.75;1" values="#e15b64;#abbd81;#f8b26a;#f47e60;#e15b64" begin="0s"></animate>
+              </circle><circle cx="76.1888" cy="50" r="10" fill="#e15b64">
+                <animate attributeName="r" repeatCount="indefinite" dur="2.9411764705882355s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;10;10;10" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="0s"></animate>
+                <animate attributeName="cx" repeatCount="indefinite" dur="2.9411764705882355s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="0s"></animate>
+              </circle><circle cx="16" cy="50" r="0" fill="#f47e60">
+                <animate attributeName="r" repeatCount="indefinite" dur="2.9411764705882355s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;10;10;10" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.7352941176470589s"></animate>
+                <animate attributeName="cx" repeatCount="indefinite" dur="2.9411764705882355s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.7352941176470589s"></animate>
+              </circle><circle cx="16" cy="50" r="7.70259" fill="#f8b26a">
+                <animate attributeName="r" repeatCount="indefinite" dur="2.9411764705882355s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;10;10;10" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-1.4705882352941178s"></animate>
+                <animate attributeName="cx" repeatCount="indefinite" dur="2.9411764705882355s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-1.4705882352941178s"></animate>
+              </circle><circle cx="42.1888" cy="50" r="10" fill="#abbd81">
+                <animate attributeName="r" repeatCount="indefinite" dur="2.9411764705882355s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;10;10;10" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-2.2058823529411766s"></animate>
+                <animate attributeName="cx" repeatCount="indefinite" dur="2.9411764705882355s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-2.2058823529411766s"></animate>
+              </circle>
+              </svg>
+              <div id="success-alert" style="display:none" class="alert alert-success" role="alert">
+                Encontramos o motorista! Confirme a retirada da mascara.
+              </div>
+
+              <div id="fail-notindb" style="display:none" class="alert alert-danger" role="alert">
+                Telefone / CPF não está na base de motorista contemplados.
+              </div>
+
+              <div id="errorupdating" style="display:none" class="alert alert-danger" role="alert">
+
+              </div>
+
+              <div id="fail-retirado" style="display:none" class="alert alert-danger" role="alert">
+                Esse CPF já retirou um kit no dia <span id="timestamp"></span>
+              </div>
+              <button id="confirmarret" type="button" onclick="confirmarRetirada()" class="btn btn-primary" style="display:none">Confirmar Retirada</button>
+
+           </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
+
+<script type="text/javascript">
+  async function sha256(message) {
+      // encode as UTF-8
+      const msgBuffer = new TextEncoder('utf-8').encode(message);
+
+      // hash the message
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+
+      // convert ArrayBuffer to Array
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+      // convert bytes to hex string
+      const hashHex = hashArray.map(b => ('00' + b.toString(16)).slice(-2)).join('');
+      return hashHex;
+  }
+
+  inputedData = ""
+  function validate() {
+    inputedData = document.getElementById('inputdata').value.replace(/[^0-9]/g, '');
+    Array.prototype.forEach.call(document.getElementsByClassName('alert'), function(el) {
+        el.style.display = "none"
+    });
+    document.getElementById('loading').style.display = "block"
+    req = new XMLHttpRequest();
+    masksjson = {}
+    req.onreadystatechange = () => {
+      if (req.readyState == XMLHttpRequest.DONE) {
+        masksjson = JSON.parse(req.responseText)
+        if(masksjson.result === "true"){
+          result = masksjson.date
+        }
+        else{
+          result = undefined
+        }
+        document.getElementById('loading').style.display = "none"
+        if(result === "0"){
+          document.getElementById('success-alert').style.display = "block"
+          document.getElementById('confirmarret').style.display = "inline-block"
+        }
+        else if(result === undefined){
+          document.getElementById('fail-notindb').style.display = "block"
+        }
+
+        else{
+          document.getElementById('timestamp').innerHTML = result
+          document.getElementById('fail-retirado').style.display = "block"
+        }
+
+
+
+      }
+    };
+    sha256(inputedData + "comumpoucodesal").then(function(hashedText){
+    req.open("GET", "http://127.0.0.1:8000/find/"+hashedText, true);
+      req.send();
+    })
+
+  }
+
+  function confirmarRetirada() {
+    document.getElementById('loading').style.display = "block"
+    Array.prototype.forEach.call(document.getElementsByClassName('alert'), function(el) {
+        el.style.display = "none"
+    });
+
+    let upreq = new XMLHttpRequest();
+    upreq.onreadystatechange = () => {
+      if (upreq.readyState == XMLHttpRequest.DONE) {
+        document.getElementById('loading').style.display = "none"
+        resUpdt = JSON.parse(upreq.responseText)
+        if(resUpdt.result === "true"){
+          alert ("Sucesso")
+          location.reload();
+        }
+        else{
+          document.getElementById('errorupdating').innerHTML = upreq.responseText
+          document.getElementById('errorupdating').style.display = "block"
+        }
+
+      }
+    };
+
+    sha256(inputedData + "comumpoucodesal").then(function(hashedText){
+    upreq.open("POST", "confirm/"+ hashedText +"/"+new Date(), true);
+      upreq.send();
+    })
+  }
+  //
+
+
+
+
+
+</script>
